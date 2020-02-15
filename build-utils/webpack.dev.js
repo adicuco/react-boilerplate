@@ -13,7 +13,7 @@ module.exports = {
     new DashboardPlugin(),
   ],
   devServer: {
-    contentBase: './dist',
+    contentBase: './public',
     historyApiFallback: true,
     hot: true,
     port: 3000,

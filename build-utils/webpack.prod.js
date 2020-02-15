@@ -9,7 +9,7 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: './dist',
+    contentBase: './public',
   },
   optimization: {
     splitChunks: {
