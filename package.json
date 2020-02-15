@@ -1,7 +1,7 @@
 {
   "name": "react-boilerplate",
   "version": "1.0.0",
-  "description": "",
+  "description": "React Boilerplate",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dashboard -- webpack-dev-server --config build-utils/webpack.config.js --env.env=dev",
@@ -9,7 +9,10 @@
     "build:analyze": "npm run build -- --env.addon=bundleanalyze --env.addon=bundlevisualizer",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "boilerplate"
+  ],
   "author": "Adrian Cucolaș",
   "license": "MIT",
   "devDependencies": {},

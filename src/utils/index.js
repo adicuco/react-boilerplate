@@ -4,18 +4,22 @@ import {
   localStorageSetItem,
 } from 'utils/storage';
 
-function parseLocalStorage(key) {
-  let result;
-  try {
-    result = JSON.parse(localStorageGetItem(key));
-  } catch (err) {
-    result = null;
-  }
-  return result;
-}
+import { writeStorage } from '@rehooks/local-storage';
+
+import constants from 'constants';
+import { THEME_DARK, THEME_LIGHT } from 'constants/theme';
 
 export default {
   splitNumber(number) {
     return number.toString().split('.');
+  },
+
+  toggleTheme() {
+    const theme = localStorageGetItem(constants.THEME_KEY);
+    if (theme === THEME_LIGHT) {
+      writeStorage(constants.THEME_KEY, THEME_DARK);
+    } else {
+      writeStorage(constants.THEME_KEY, THEME_LIGHT);
+    }
   },
 };

@@ -4,15 +4,22 @@ import { connect } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import QueryString from 'query-string';
+import { ThemeProvider } from 'styled-components';
+import { useLocalStorage } from '@rehooks/local-storage';
 
 import { updateRouterState } from 'actions/router';
 
 import HomePage from 'routes/HomePage';
 
+import GlobalStyles from 'constants/GlobalStyles';
+import themes from 'constants/theme';
+import constants from 'constants';
+
 const history = createBrowserHistory();
 
-const AppRouter = props => {
+const AppRouter = ({ updateRouter }) => {
   const { location } = history;
+  const [theme] = useLocalStorage(constants.THEME_KEY);
 
   useEffect(() => {
     const decodedSearch = decodeURIComponent(location.search);
@@ -24,26 +31,29 @@ const AppRouter = props => {
     );
     const queryStrings = QueryString.parse(stringCutBeforeSlash);
 
-    props.updateRouterState({
+    updateRouter({
       pathname: location.pathname,
       params: queryStrings,
     });
   }, [location]);
 
   return (
-    <Router history={history}>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-      </Switch>
-    </Router>
+    <ThemeProvider theme={themes[theme]}>
+      <GlobalStyles />
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+        </Switch>
+      </Router>
+    </ThemeProvider>
   );
 };
 
 AppRouter.propTypes = {
-  updateRouterState: PropTypes.func.isRequired,
+  updateRouter: PropTypes.func.isRequired,
 };
 
 export default connect(
   null,
-  { updateRouterState }
+  { updateRouter: updateRouterState }
 )(AppRouter);

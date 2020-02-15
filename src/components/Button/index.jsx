@@ -6,10 +6,16 @@ import BaseButton from './BaseButton';
 const DefaultButton = styled(BaseButton)`
   font-size: 1em;
   margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid tomato;
+  padding: 0.5em 1em;
+  border: 2px solid ${({ theme }) => theme.primary};
   border-radius: 3px;
-  color: tomato;
+  color: ${({ theme }) => theme.primary};
+  background: transparent;
+
+  & :hover {
+    background: ${({ theme }) => theme.primary};
+    color: #fff;
+  }
 `;
 
 export default props => <DefaultButton text="default" {...props} />;

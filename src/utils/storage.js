@@ -1,7 +1,10 @@
 /* eslint-disable no-empty */
-export function localStorageGetItem(key) {
+export function localStorageGetItem(key, parse = false) {
   try {
-    return localStorage.getItem(key);
+    const result = parse
+      ? JSON.parse(localStorage.getItem(key))
+      : localStorage.getItem(key);
+    return result;
   } catch (error) {
     return null;
   }
@@ -13,9 +16,8 @@ export function localStorageRemoveItem(key) {
   } catch (error) {}
 }
 
-// eslint-disable-next-line consistent-return
 export function localStorageSetItem(key, value) {
   try {
-    return localStorage.setItem(key, value);
+    localStorage.setItem(key, value);
   } catch (error) {}
 }
