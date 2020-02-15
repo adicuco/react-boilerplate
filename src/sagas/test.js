@@ -14,6 +14,6 @@ function* test() {
   }
 }
 
-export default function* watchWidget() {
+export default function* watchTest() {
   yield takeLatest(TEST_ACTION.REQUEST, test);
 }

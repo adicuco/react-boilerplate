@@ -64,7 +64,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Maaltidsknappen Widget',
+      title: 'React boilerplate',
       template: './src/index.html',
     }),
   ],
