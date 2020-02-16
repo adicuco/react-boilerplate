@@ -1,11 +1,9 @@
-/* eslint-disable */
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useLocalStorage } from '@rehooks/local-storage';
 import { Link } from 'react-router-dom';
 
-import { FiMoon, FiSun } from 'react-icons/fi';
+import { FiSun } from 'react-icons/fi';
 import { IoMdMoon } from 'react-icons/io';
 
 import utils from 'utils';
@@ -30,7 +28,7 @@ const SubContainer = styled.div`
   align-items: center;
 `;
 
-const Header = props => {
+const Header = () => {
   const [theme] = useLocalStorage(constants.THEME_KEY);
 
   return (
@@ -47,7 +45,9 @@ const Header = props => {
             unchecked: <FiSun />,
           }}
         />
-        <Button title="Log In" reverse />
+        <Link to="/login">
+          <Button title="Log In" reverse />
+        </Link>
       </SubContainer>
     </Container>
   );
