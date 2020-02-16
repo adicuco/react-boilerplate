@@ -17,6 +17,12 @@ const GlobalStyles = createGlobalStyle`
     font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     transition: all 0.25s linear;
   }
+
+  a:link {
+    color: ${({ theme }) => theme.primary};
+    cursor: pointer;
+    text-decoration: underline;
+}
   
   #root {
     width: 100%;

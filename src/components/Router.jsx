@@ -17,6 +17,7 @@ import Header from 'components/Header';
 
 import HomePage from 'routes/HomePage';
 import Register from 'routes/Register';
+import Login from 'routes/Login';
 
 const history = createBrowserHistory();
 
@@ -48,6 +49,7 @@ const AppRouter = ({ updateRouter }) => {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
         </Switch>
       </Router>
     </ThemeProvider>

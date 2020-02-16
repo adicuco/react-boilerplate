@@ -14,13 +14,22 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const ButtonsContainer = styled.div`
+  display: flex;
+`;
+
 const HomePage = () => {
   return (
     <Container>
       <h1>React Boileplate</h1>
-      <Link to="/register">
-        <Button title="Register" />
-      </Link>
+      <ButtonsContainer>
+        <Link to="/register">
+          <Button title="Register" />
+        </Link>
+        <Link to="/login">
+          <Button title="Login" reverse />
+        </Link>
+      </ButtonsContainer>
     </Container>
   );
 };

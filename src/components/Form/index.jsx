@@ -10,7 +10,7 @@ const Container = styled.form`
   flex-direction: column;
 `;
 
-const Form = ({ onSubmit, fields }) => {
+const Form = ({ onSubmit, fields, text }) => {
   const [data, setData] = useState(
     fields.reduce((obj, field) => ({ ...obj, [field.name]: '' }), {})
   );
@@ -39,12 +39,13 @@ const Form = ({ onSubmit, fields }) => {
           {...(field.type && { type: field.type })}
         />
       ))}
-      <Button title="Register" reverse />
+      <Button title={text} reverse />
     </Container>
   );
 };
 
 Form.defaultProps = {
+  text: 'Submit',
   fields: [
     { name: 'username', placeholder: 'Username' },
     { name: 'password', placeholder: 'Password', type: 'password' },
@@ -52,6 +53,7 @@ Form.defaultProps = {
 };
 
 Form.propTypes = {
+  text: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,
   fields: arrayOf(
     PropTypes.shape({

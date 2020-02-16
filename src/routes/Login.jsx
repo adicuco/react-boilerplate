@@ -20,11 +20,11 @@ const Message = styled.div`
   }
 `;
 
-const Register = () => {
-  const handleRegister = data => {
+const Login = () => {
+  const handleLogin = data => {
     console.log(data);
 
-    // register({
+    // Login({
     //   username,
     //   password,
     // });
@@ -32,7 +32,7 @@ const Register = () => {
 
   return (
     <Container>
-      <h1>Register</h1>
+      <h1>Login</h1>
       <Form
         fields={[
           { name: 'username', placeholder: 'Username' },
@@ -42,16 +42,16 @@ const Register = () => {
             type: 'password',
           },
         ]}
-        onSubmit={handleRegister}
-        text="Register"
+        onSubmit={handleLogin}
+        text="Login"
       />
 
       <Message>
-        <span>Already have an account?</span>
-        <Link to="/login">Login</Link>
+        <span>Don&apos;t have an account?</span>
+        <Link to="/register">Register</Link>
       </Message>
     </Container>
   );
 };
 
-export default Register;
+export default Login;
