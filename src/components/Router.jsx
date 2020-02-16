@@ -8,6 +8,7 @@ import { ThemeProvider } from 'styled-components';
 import { useLocalStorage } from '@rehooks/local-storage';
 
 import { updateRouterState } from 'actions/router';
+import { authentificate } from 'actions/auth';
 
 import GlobalStyles from 'constants/GlobalStyles';
 import themes, { THEME_LIGHT } from 'constants/theme';
@@ -21,7 +22,7 @@ import Login from 'routes/Login';
 
 const history = createBrowserHistory();
 
-const AppRouter = ({ updateRouter }) => {
+const AppRouter = ({ updateRouter, auth }) => {
   const { location } = history;
   const [theme] = useLocalStorage(constants.THEME_KEY);
 
@@ -41,6 +42,10 @@ const AppRouter = ({ updateRouter }) => {
     });
   }, [location]);
 
+  useEffect(() => {
+    auth();
+  }, []);
+
   return (
     <ThemeProvider theme={themes[theme] || themes[THEME_LIGHT]}>
       <GlobalStyles />
@@ -58,9 +63,10 @@ const AppRouter = ({ updateRouter }) => {
 
 AppRouter.propTypes = {
   updateRouter: PropTypes.func.isRequired,
+  auth: PropTypes.func.isRequired,
 };
 
 export default connect(
   null,
-  { updateRouter: updateRouterState }
+  { updateRouter: updateRouterState, auth: authentificate }
 )(AppRouter);

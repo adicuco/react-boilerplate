@@ -22,4 +22,13 @@ export default {
       writeStorage(constants.THEME_KEY, THEME_LIGHT);
     }
   },
+
+  getAuthToken() {
+    const token = localStorageGetItem(constants.JWT_TOKEN_KEY);
+    return {
+      headers: {
+        'x-auth-token': token,
+      },
+    };
+  },
 };
