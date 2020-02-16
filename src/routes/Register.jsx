@@ -1,6 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+
+import { register } from 'actions/auth';
 
 import Form from 'components/Form';
 
@@ -20,14 +24,13 @@ const Message = styled.div`
   }
 `;
 
-const Register = () => {
-  const handleRegister = data => {
-    console.log(data);
+const Register = ({ isAuth, registerUser }) => {
+  if (isAuth) {
+    return <Redirect to="/app" />;
+  }
 
-    // register({
-    //   username,
-    //   password,
-    // });
+  const handleRegister = data => {
+    registerUser(data);
   };
 
   return (
@@ -54,4 +57,14 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  isAuth: PropTypes.bool.isRequired,
+  registerUser: PropTypes.func.isRequired,
+};
+
+export default connect(
+  state => ({
+    isAuth: state.auth.isAuthenticated,
+  }),
+  { registerUser: register }
+)(Register);

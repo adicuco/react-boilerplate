@@ -1,6 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+
+import { login } from 'actions/auth';
 
 import Form from 'components/Form';
 
@@ -20,14 +24,13 @@ const Message = styled.div`
   }
 `;
 
-const Login = () => {
-  const handleLogin = data => {
-    console.log(data);
+const Login = ({ isAuth, loginUser }) => {
+  if (isAuth) {
+    return <Redirect to="/app" />;
+  }
 
-    // Login({
-    //   username,
-    //   password,
-    // });
+  const handleLogin = data => {
+    loginUser(data);
   };
 
   return (
@@ -54,4 +57,14 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  isAuth: PropTypes.bool.isRequired,
+  loginUser: PropTypes.func.isRequired,
+};
+
+export default connect(
+  state => ({
+    isAuth: state.auth.isAuthenticated,
+  }),
+  { loginUser: login }
+)(Login);
