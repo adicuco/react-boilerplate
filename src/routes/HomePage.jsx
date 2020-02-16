@@ -21,7 +21,7 @@ const ButtonsContainer = styled.div`
 const HomePage = () => {
   return (
     <Container>
-      <h1>React Boileplate</h1>
+      <h1>React Boilerplate</h1>
       <ButtonsContainer>
         <Link to="/register">
           <Button title="Register" />
