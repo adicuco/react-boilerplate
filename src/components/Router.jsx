@@ -16,6 +16,7 @@ import constants from 'constants';
 import Header from 'components/Header';
 
 import HomePage from 'routes/HomePage';
+import Register from 'routes/Register';
 
 const history = createBrowserHistory();
 
@@ -46,6 +47,7 @@ const AppRouter = ({ updateRouter }) => {
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/register" component={Register} />
         </Switch>
       </Router>
     </ThemeProvider>

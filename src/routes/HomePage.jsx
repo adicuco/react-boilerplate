@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Button from 'components/Button';
 
@@ -16,8 +17,10 @@ const Container = styled.div`
 const HomePage = () => {
   return (
     <Container>
-      <h1>React Boilerplate</h1>
-      <Button title="Welcome" />
+      <h1>React Boileplate</h1>
+      <Link to="/register">
+        <Button title="Register" />
+      </Link>
     </Container>
   );
 };

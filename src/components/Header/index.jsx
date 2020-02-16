@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useLocalStorage } from '@rehooks/local-storage';
+import { Link } from 'react-router-dom';
 
 import { FiMoon, FiSun } from 'react-icons/fi';
 import { IoMdMoon } from 'react-icons/io';
@@ -34,7 +35,9 @@ const Header = props => {
 
   return (
     <Container>
-      <Button title="Home" />
+      <Link to="/">
+        <Button title="Home" />
+      </Link>
       <SubContainer>
         <Toggle
           onChange={utils.toggleTheme}
