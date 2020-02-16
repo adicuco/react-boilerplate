@@ -1,13 +1,13 @@
+/* eslint-disable */
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useLocalStorage } from '@rehooks/local-storage';
 import { Link } from 'react-router-dom';
 
 import { FiSun } from 'react-icons/fi';
 import { IoMdMoon } from 'react-icons/io';
 
 import utils from 'utils';
-import constants from 'constants';
 import { THEME_LIGHT } from 'constants/theme';
 
 import Button from 'components/Button';
@@ -20,6 +20,8 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 2em;
+  position: fixed;
+  top: 0;
 `;
 
 const SubContainer = styled.div`
@@ -28,12 +30,10 @@ const SubContainer = styled.div`
   align-items: center;
 `;
 
-const Header = () => {
-  const [theme] = useLocalStorage(constants.THEME_KEY);
-
+const Header = ({ theme, isAuth }) => {
   return (
     <Container>
-      <Link to="/">
+      <Link to={isAuth ? '/app' : '/'}>
         <Button title="Home" />
       </Link>
       <SubContainer>
@@ -45,14 +45,19 @@ const Header = () => {
             unchecked: <FiSun />,
           }}
         />
-        <Link to="/login">
-          <Button title="Log In" reverse />
-        </Link>
+        {!isAuth && (
+          <Link to="/login">
+            <Button title="Log In" reverse />
+          </Link>
+        )}
       </SubContainer>
     </Container>
   );
 };
 
-Header.propTypes = {};
+Header.propTypes = {
+  theme: PropTypes.string.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+};
 
 export default Header;

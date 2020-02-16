@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import QueryString from 'query-string';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { useLocalStorage } from '@rehooks/local-storage';
 
 import { updateRouterState } from 'actions/router';
@@ -22,7 +22,16 @@ import Login from 'routes/Login';
 
 const history = createBrowserHistory();
 
-const AppRouter = ({ updateRouter, auth }) => {
+const Body = styled.div`
+  height: 100%;
+  width: 100%;
+  padding-top: 64px;
+  max-width: 1250px;
+  display: flex;
+  justify-content: center;
+`;
+
+const AppRouter = ({ updateRouter, auth, isAuth }) => {
   const { location } = history;
   const [theme] = useLocalStorage(constants.THEME_KEY);
 
@@ -50,12 +59,14 @@ const AppRouter = ({ updateRouter, auth }) => {
     <ThemeProvider theme={themes[theme] || themes[THEME_LIGHT]}>
       <GlobalStyles />
       <Router history={history}>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-        </Switch>
+        <Header theme={theme} isAuth={isAuth} />
+        <Body>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+          </Switch>
+        </Body>
       </Router>
     </ThemeProvider>
   );
@@ -64,9 +75,12 @@ const AppRouter = ({ updateRouter, auth }) => {
 AppRouter.propTypes = {
   updateRouter: PropTypes.func.isRequired,
   auth: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool.isRequired,
 };
 
 export default connect(
-  null,
+  state => ({
+    isAuth: state.auth.isAuthenticated,
+  }),
   { updateRouter: updateRouterState, auth: authentificate }
 )(AppRouter);
