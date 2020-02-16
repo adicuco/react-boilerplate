@@ -12,7 +12,7 @@ import { updateRouterState } from 'actions/router';
 import HomePage from 'routes/HomePage';
 
 import GlobalStyles from 'constants/GlobalStyles';
-import themes from 'constants/theme';
+import themes, { THEME_LIGHT } from 'constants/theme';
 import constants from 'constants';
 
 const history = createBrowserHistory();
@@ -38,7 +38,7 @@ const AppRouter = ({ updateRouter }) => {
   }, [location]);
 
   return (
-    <ThemeProvider theme={themes[theme]}>
+    <ThemeProvider theme={themes[theme] || themes[THEME_LIGHT]}>
       <GlobalStyles />
       <Router history={history}>
         <Switch>

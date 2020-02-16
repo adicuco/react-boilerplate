@@ -16,7 +16,7 @@ export default {
 
   toggleTheme() {
     const theme = localStorageGetItem(constants.THEME_KEY);
-    if (theme === THEME_LIGHT) {
+    if (theme === THEME_LIGHT || !theme) {
       writeStorage(constants.THEME_KEY, THEME_DARK);
     } else {
       writeStorage(constants.THEME_KEY, THEME_LIGHT);
