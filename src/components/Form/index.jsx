@@ -14,9 +14,16 @@ const Form = ({ onSubmit, fields, text }) => {
   const [data, setData] = useState(
     fields.reduce((obj, field) => ({ ...obj, [field.name]: '' }), {})
   );
+  const [errors, setErrors] = useState(
+    fields.reduce(
+      (obj, field) => ({ ...obj, [field.name]: false }),
+      {}
+    )
+  );
 
   const handleSubmit = e => {
     e.preventDefault();
+
     onSubmit(data);
   };
 
@@ -24,6 +31,20 @@ const Form = ({ onSubmit, fields, text }) => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleInvalid = e => {
+    setErrors({
+      ...errors,
+      [e.target.name]: true,
+    });
+  };
+
+  const removeInvalid = e => {
+    setErrors({
+      ...errors,
+      [e.target.name]: false,
     });
   };
 
@@ -36,7 +57,11 @@ const Form = ({ onSubmit, fields, text }) => {
           value={data[field.name]}
           onChange={handleOnChange}
           name={field.name}
+          required={field.required}
+          onInvalid={handleInvalid}
+          onInput={removeInvalid}
           {...(field.type && { type: field.type })}
+          error={errors[field.name]}
         />
       ))}
       <Button title={text} reverse />
@@ -47,8 +72,13 @@ const Form = ({ onSubmit, fields, text }) => {
 Form.defaultProps = {
   text: 'Submit',
   fields: [
-    { name: 'username', placeholder: 'Username' },
-    { name: 'password', placeholder: 'Password', type: 'password' },
+    { name: 'username', placeholder: 'Username', required: true },
+    {
+      name: 'password',
+      placeholder: 'Password',
+      type: 'password',
+      required: true,
+    },
   ],
 };
 

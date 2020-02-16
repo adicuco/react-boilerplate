@@ -38,11 +38,16 @@ const Login = ({ isAuth, loginUser }) => {
       <h1>Login</h1>
       <Form
         fields={[
-          { name: 'username', placeholder: 'Username' },
+          {
+            name: 'username',
+            placeholder: 'Username',
+            required: true,
+          },
           {
             name: 'password',
             placeholder: 'Password',
             type: 'password',
+            required: true,
           },
         ]}
         onSubmit={handleLogin}

@@ -4,6 +4,7 @@ export const THEME_DARK = 'THEME_DARK';
 const defaults = {
   primary: 'dodgerblue',
   secondary: 'lightgray',
+  error: 'red',
 };
 
 export default {
