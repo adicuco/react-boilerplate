@@ -9,11 +9,13 @@ import { useLocalStorage } from '@rehooks/local-storage';
 
 import { updateRouterState } from 'actions/router';
 
-import HomePage from 'routes/HomePage';
-
 import GlobalStyles from 'constants/GlobalStyles';
 import themes, { THEME_LIGHT } from 'constants/theme';
 import constants from 'constants';
+
+import Header from 'components/Header';
+
+import HomePage from 'routes/HomePage';
 
 const history = createBrowserHistory();
 
@@ -41,6 +43,7 @@ const AppRouter = ({ updateRouter }) => {
     <ThemeProvider theme={themes[theme] || themes[THEME_LIGHT]}>
       <GlobalStyles />
       <Router history={history}>
+        <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
         </Switch>
