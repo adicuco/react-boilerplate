@@ -15,7 +15,9 @@
   ],
   "author": "Adrian Cucolaș",
   "license": "MIT",
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3"
+  },
   "dependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
